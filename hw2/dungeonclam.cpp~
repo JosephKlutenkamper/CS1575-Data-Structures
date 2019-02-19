@@ -1,0 +1,123 @@
+//Programmer: Joseph Klutenkamper
+//Date:       9/25/2017
+//Class:      CS1575
+//Hw:         2(Dungeon and clams)
+//-----------------------------------------------------------------------------
+//Program description:
+//-----------------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+
+bool move(int row, int col, char** maz);
+
+int main()
+{
+  int cs;
+  int rs;
+  bool zoid=false;
+  do {
+
+  // Maze is a 2D array of characters
+  char** maze;// Readin size of Maze
+
+  // Readin size of Maze
+  cin >> cs >> rs;
+  cout << cs << " " << rs << endl;
+  cin.ignore();    // to move read head to next line
+
+  // Allocate Maze Array
+  maze = new char*[rs];
+  for(int k=0; k < rs; k++)
+  {
+    maze[k] = new char[cs];
+  }
+
+
+  // Read Maze Array
+  // Notice that we are reading *Character by Character*
+  // and after every row we need to read an extra character
+  // to account for the 'end-of-line' character
+  char dummy;
+  for(int k=0; k < rs; k++)
+  {
+    for(int j=0; j < cs; j++)
+    {
+      cin.get(maze[k][j]);
+    }
+    cin.get(dummy);   // read end-of-line
+  }
+
+
+  for(int k=0; k < rs; k++)
+  {
+    for(int j=0; j < cs; j++)
+    {
+      if(maze[k][j]=='Z')
+      {
+        zoid=move(k,j,maze);
+      }
+    }
+  }
+
+  // Print Maze Array
+  if(zoid==true)
+  {
+  for(int k=0; k < rs; k++)
+  {
+    for(int j=0; j < cs; j++)
+    {
+      cout << maze[k][j];
+    }
+    cout << endl;   // read end-of-line
+  }
+  }
+  cout << endl;
+  // De-allocate Maze Array
+  for(int k=0; k < rs; k++)
+  {
+    delete [] maze[k];
+  }
+  delete [] maze;
+}while((rs>0)&&(cs>0));
+
+  return 0;
+}
+
+
+bool move(int row, int col, char** maz)
+{
+
+  if(maz[row][col]=='E')
+  {
+    return true;
+  }
+  if(maz[row][col]!=' ')
+  {
+    return false;
+  }
+  else if(maz[row][col]==' '||maz[row][col]=='Z')
+  {
+    //maz[row][col]='.';
+    //if(move(row+1,col,maz))
+    //{
+    //  return true;
+    //}
+    //if(move(row,col+1,maz))
+    //{
+    //  return true;
+    //}
+    //if(move(row,col-1,maz))
+    //{
+    //  return true;
+    //}
+    //if(move(row-1,col,maz))
+    //{
+    //  return true;
+    //}
+
+    //maz[row][col]=' ';
+    //return false;
+
+  }
+  return true;
+}
